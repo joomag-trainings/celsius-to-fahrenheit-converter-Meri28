@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title> Temperature Converter</title>
+<body>
+<style>
+    .barC , .barF {
+        position: relative;
+        background-color: transparent;
+        height: 300px;
+        width:30px;
+
+        margin:20px;
+        border:2px solid gray;
+
+    }
+
+    .barC {
+        float:left;
+    }
+
+    .barF  {
+        float:right;
+    }
+
+    #barC,#barF {
+        position: absolute;
+        background-color: darkred;
+        bottom:0px;
+        width: 27px;
+        height:10px;
+
+    }
+    h2 {
+        text-align:center;
+        color:red;
+    }
+    .container {
+        margin:auto auto;
+        width:60%;
+        height:600px;
+        background-color:lightgrey;
+        border-radius: 20px;
+        border:3px solid darkred;
+    }
+</style>
+<div class="container">
+
+
+<h2>Temperature Converter</h2>
+
+
+<p><input id="cTemp" oninput="convert('C')"> degrees Celsius</p>
+
+<p><input id="fTemp" oninput="convert('F')"> degrees Fahrenheit</p>
+<br>
+
+
+<div class="barC">
+    <div id="barC"> </div> </div>
+
+
+    <p>Celcius</p>
+
+<div class="barF">
+    <div id="barF"> </div>
+</div>
+</div>
+<script>
+    var barC=document.getElementById('barC');
+    var barF=document.getElementById('barF');
+    var Temp;
+    function convert(degree) {
+
+        if (degree == "C") {
+
+            if(document.getElementById("cTemp").value>1000)
+                document.getElementById("cTemp").value=1000;
+            if(document.getElementById("cTemp").value<-273)
+                document.getElementById("cTemp").value=-273;
+
+            var Temp = document.getElementById("cTemp").value * 9 / 5 + 32;
+            document.getElementById("fTemp").value = Math.round(Temp);
+            barF.style.height=250+Temp*250/1832+"px";
+            barC.style.height=parseInt(document.getElementById("cTemp").value)/4+250+"px";
+
+        }
+        else {
+            if(document.getElementById("fTemp").value>1832)
+                document.getElementById("fTemp").value=1832;
+            if(document.getElementById("fTemp").value<-460)
+                document.getElementById("fTemp").value=-460;
+            var Temp = (document.getElementById("fTemp").value -32) * 5 / 9;
+            document.getElementById("cTemp").value = Math.round(Temp);
+            barC.style.height=250+Temp/4+"px";
+            barF.style.height=parseInt(document.getElementById("fTemp").value)*250/1832+250+"px";
+        }
+
+    }
+
+
+
+</script>
+</body>
+</html>
+
